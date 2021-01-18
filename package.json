@@ -2,7 +2,7 @@
   "name": "@teyostudios/apply-dynamic-actions",
   "version": "0.1.0",
   "description": "Apply events to DOM elements to manipulate classes of any element of the DOM, in a simple way, using only attributes or few lines of code.",
-  "main": "applyDynamicActions.js",
+  "main": "src/js/applyDynamicActions.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
