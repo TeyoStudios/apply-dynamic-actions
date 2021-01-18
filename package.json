@@ -1,6 +1,6 @@
 {
   "name": "@teyostudios/apply-dynamic-actions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Apply events to DOM elements to manipulate classes of any element of the DOM, in a simple way, using only attributes or few lines of code.",
   "main": "src/js/applyDynamicActions.js",
   "scripts": {
@@ -17,5 +17,10 @@
     "url": "https://github.com/TeyoStudios/apply-dynamic-actions/issues"
   },
   "homepage": "https://github.com/TeyoStudios/apply-dynamic-actions#readme",
-  "files": ["src", "package.json", "README.md", "LICENCE"]
+  "files": [
+    "src",
+    "package.json",
+    "README.md",
+    "LICENCE"
+  ]
 }
