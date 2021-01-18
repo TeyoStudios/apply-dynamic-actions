@@ -33,7 +33,7 @@ const DynamicActions = () =>  {
         }
 
         size = elements.push(newEl);
-        order[el] = size - 1;
+        order[el] ? order[el].push(size - 1) : order[el] = [size - 1];
       });
 
       if(el.dataset.tsAction) {
@@ -46,7 +46,7 @@ const DynamicActions = () =>  {
               containerQuery: el.dataset.tsContainerQuery
           }
           size = elements.push(newEl);
-          order[el] = size - 1;
+          order[el] ? order[el].push(size - 1) : order[el] = [size - 1]
       };
     });
   } 
@@ -56,7 +56,7 @@ const DynamicActions = () =>  {
    */
   const addElement = (elConfig) => {
     let size = elements.push(elConfig);
-    order[elConfig.el] = size - 1; 
+    order[elConfig.el] ? order[elConfig.el].push(size - 1) : order[elConfig.el] = [size - 1]
   }
 
   /**
@@ -75,33 +75,37 @@ const DynamicActions = () =>  {
    */
   const _onEventDispatch = (event) => {
     let target = event.currentTarget;
-    let index = order[target];
-    let config = elements[index];
+    let indexes = order[target];
 
-    let action = config.action;
-    let containerQuery = config.containerQuery;
-    let className = config.class;
+    indexes.forEach(index => {
+        let config = elements[index];
+        
+        let action = config.action;
+        let containerQuery = config.containerQuery;
+        let className = config.class;
+        
+        let containers = document.querySelectorAll(containerQuery);
+        if(containers.length == 0) {
+          containers = [target];
+      };
 
-    let containers = document.querySelectorAll(containerQuery);
-    if(containers.length == 0) {
-        containers = [target];
-    };
+      containers.forEach((container) => {
+          if (action && container && className) {
+              switch(action) {
+                  case "add": 
+                      container.classList.add(className);
+                      break;
+                  case "remove":
+                      container.classList.remove(className);
+                      break;
+                  case "toggle":
+                      container.classList.toggle(className);
+                      break;
+              };    
+          };
+      });
+    })
 
-    containers.forEach((container) => {
-        if (action && container && className) {
-            switch(action) {
-                case "add": 
-                    container.classList.add(className);
-                    break;
-                case "remove":
-                    container.classList.remove(className);
-                    break;
-                case "toggle":
-                    container.classList.toggle(className);
-                    break;
-            };    
-        };
-    });
   }
 
   return {
